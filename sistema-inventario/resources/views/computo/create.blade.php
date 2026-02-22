@@ -130,7 +130,7 @@
     <div class="section-card space-y-4">
         <h3 class="text-lg font-semibold"
             style="color: var(--color-dorado);">
-            Archivo de Factura
+            Archivo de Factura (PDF)
         </h3>
 
         <div class="flex items-center gap-4">
@@ -215,7 +215,7 @@
                 <label class="block text-xs uppercase tracking-wider mb-2" style="color: var(--color-carbon-400);">
                     Especificaciones Técnicas
                 </label>
-                <textarea name="especificaciones" rows="3" 
+                <textarea name="especificaciones" rows="3"
                           placeholder="Ej: Procesador i7, 16GB RAM, 512GB SSD..."
                           class="input-style rounded-xl px-3 py-2 w-full text-sm"></textarea>
             </div>

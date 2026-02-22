@@ -133,7 +133,7 @@
     <div class="section-card space-y-4">
         <h3 class="text-lg font-semibold"
             style="color: var(--color-dorado);">
-            Archivo de Factura
+            Archivo de Factura (PDF)
         </h3>
 
         <div class="flex items-center gap-4">

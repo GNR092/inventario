@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-    @vite(['resources/css/inventario.css','resources/css/app.css', 'resources/js/app.js',  'resources/js/inventario.js'])
+    @vite(['resources/css/inventario.css','resources/css/app.css', 'resources/js/app.js', 'resources/js/inventario.js', 'resources/js/global_transitions.js'])
 </head>
 
 <body>
+
+    <!-- Transición tipo Apple -->
+    <div class="apple-transition" id="appleTransition" aria-hidden="true">
+        <div class="veil"></div>
+        <img src="{{ asset('images/Logo-MB.svg') }}" class="transition-logo" alt="Logo MB">
+    </div>
 
     <!-- ========================= -->
     <!-- 🔝 NAV PRINCIPAL -->

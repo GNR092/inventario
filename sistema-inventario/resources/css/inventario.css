@@ -453,3 +453,67 @@ body{
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ====== TRANSICIÓN “APPLE” ====== */
+.apple-transition{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .25s ease;
+}
+.apple-transition .veil{
+    position:absolute;
+    inset:0;
+    background: radial-gradient(circle at center, rgba(212,175,55,.18), rgba(0,0,0,.95) 55%);
+    filter: blur(0px);
+    transform: scale(1.02);
+    opacity: 0;
+}
+.apple-transition.active{
+    opacity: 1;
+}
+.apple-transition.active .veil{
+    animation: appleVeil .75s cubic-bezier(.2,.9,.2,1) forwards;
+}
+@keyframes appleVeil{
+    0%{ opacity:0; filter: blur(0px); transform: scale(1.02); }
+    55%{ opacity:1; filter: blur(6px); transform: scale(1.06); }
+    100%{ opacity:1; filter: blur(18px); transform: scale(1.12); }
+}
+
+.transition-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5); /* Initially smaller and centered */
+    opacity: 0; /* Initially hidden */
+    z-index: 10000; /* Above the veil */
+    width: 187px; /* Adjust size as needed */
+    height: auto;
+}
+
+/* Animate logo along with the veil */
+.apple-transition.active .transition-logo {
+    animation: logoTransition 0.7s cubic-bezier(.2,.9,.2,1) forwards;
+    animation-delay: 0.1s; /* Start slightly after veil begins */
+}
+
+@keyframes logoTransition {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+        filter: blur(10px);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+        filter: blur(0px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        filter: blur(0px);
+    }
+}

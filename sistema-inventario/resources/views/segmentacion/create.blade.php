@@ -37,33 +37,6 @@
       class="space-y-10">
 @csrf
 
-{{-- ================= XML CFDI ================= --}}
-<div class="section-card space-y-4">
-    <h3 class="text-lg font-semibold" style="color: var(--color-dorado);">
-        Cargar XML CFDI (Opcional)
-    </h3>
-
-    <div class="flex items-center gap-4">
-        <label for="Factura_XML" class="btn-secondary cursor-pointer">
-            Seleccionar XML
-        </label>
-
-        <span id="xml-name" class="text-sm text-gray-300">
-            Ningún XML seleccionado
-        </span>
-
-        <input type="file"
-               id="Factura_XML"
-               name="Factura_XML"
-               accept=".xml"
-               class="hidden">
-    </div>
-
-    <p class="text-xs opacity-70">
-        Si el XML es válido, se autocompletarán datos fiscales y el MOI.
-    </p>
-</div>
-
 {{-- ================= INFORMACIÓN GENERAL ================= --}}
 <div class="section-card space-y-6">
     <h3 class="text-lg font-semibold" style="color: var(--color-dorado);">
@@ -174,7 +147,7 @@
 {{-- ================= FACTURA PDF/XML ================= --}}
 <div class="section-card space-y-4">
     <h3 class="text-lg font-semibold" style="color: var(--color-dorado);">
-        Archivo de Factura (PDF o XML)
+        Archivo de Factura (PDF)
     </h3>
 
     <div class="flex items-center gap-4">
@@ -192,6 +165,33 @@
                accept=".pdf,.xml"
                class="hidden">
     </div>
+</div>
+
+{{-- ================= XML CFDI ================= --}}
+<div class="section-card space-y-4">
+    <h3 class="text-lg font-semibold" style="color: var(--color-dorado);">
+        Cargar XML CFDI (Opcional)
+    </h3>
+
+    <div class="flex items-center gap-4">
+        <label for="Factura_XML" class="btn-secondary cursor-pointer">
+            Seleccionar XML
+        </label>
+
+        <span id="xml-name" class="text-sm text-gray-300">
+            Ningún XML seleccionado
+        </span>
+
+        <input type="file"
+               id="Factura_XML"
+               name="Factura_XML"
+               accept=".xml"
+               class="hidden">
+    </div>
+
+    <p class="text-xs opacity-70">
+        Si el XML es válido, se autocompletarán datos fiscales y el MOI.
+    </p>
 </div>
 
 {{-- ================= BOTÓN ================= --}}

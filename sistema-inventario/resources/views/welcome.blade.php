@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Inventario</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/global_transitions.js'])
 
     <style>
         :root{
@@ -87,7 +87,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 56px 0 56px;
+            padding: 56px 0 50px;
         }
         .stage{
             width: 100%;
@@ -137,22 +137,34 @@
             stroke-linecap: round;
             stroke-dasharray: 1200;
             stroke-dashoffset: 1200;
-            animation: strokeDraw 2.2s ease forwards;
+            animation: animateStroke 6s ease-in-out infinite;
             filter: drop-shadow(0 0 12px rgba(212,175,55,.25));
         }
         .title-text-fill{
             fill: var(--color-dorado);
             opacity: 0;
-            animation: fillIn 0.7s ease forwards;
-            animation-delay: 1.65s;
+            animation: animateFill 6s ease-in-out infinite;
             filter: drop-shadow(0 0 20px rgba(212,175,55,.12));
         }
-        @keyframes strokeDraw { to { stroke-dashoffset: 0; } }
-        @keyframes fillIn { to { opacity: 1; } }
+        @keyframes animateStroke {
+            0% { stroke-dashoffset: 1200; opacity: 1; }
+            20% { stroke-dashoffset: 0; opacity: 1; }
+            80% { stroke-dashoffset: 0; opacity: 1; }
+            90% { stroke-dashoffset: 0; opacity: 0; }
+            100% { stroke-dashoffset: 1200; opacity: 0; }
+        }
+        @keyframes animateFill {
+            0% { opacity: 0; }
+            25% { opacity: 0; }
+            35% { opacity: 1; }
+            80% { opacity: 1; }
+            90% { opacity: 0; }
+            100% { opacity: 0; }
+        }
 
         .subtitle{
             max-width: 860px;
-            margin: 16px auto 0;
+            margin: -10px auto 0;
             color: var(--color-carbon-300);
             line-height: 1.75;
             font-size: 1.05rem;
@@ -245,8 +257,9 @@
             will-change: transform;
         }
         .card:hover{
-            transform: translateZ(10px) translateY(-2px);
-            box-shadow: 0 0 22px rgba(212,175,55,.16);
+            transform: translateZ(10px) translateY(-4px) scale(1.02);
+            box-shadow: 0 8px 28px rgba(212,175,55,.22), 0 0 12px rgba(212,175,55,.18);
+            border-color: rgba(212,175,55,.4);
         }
         .card h3{
             margin: 10px 0 8px;
@@ -258,14 +271,6 @@
             color: var(--color-carbon-400);
             line-height: 1.55;
             font-size: .92rem;
-        }
-
-        /* ====== FOOTER ====== */
-        .footer{
-            margin-top: 34px;
-            padding-top: 10px;
-            color: var(--color-carbon-500);
-            font-size: .9rem;
         }
 
         /* ====== TRANSICIÓN “APPLE” ====== */
@@ -302,10 +307,29 @@
             .title-text-stroke, .title-text-fill, .logo, .btn::before, .bg-halo::before { animation: none !important; }
             .btn, .card { transition: none !important; }
         }
+
+        .fixed-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--color-carbon-950); /* Muy oscuro */
+            color: var(--color-carbon-700); /* Color de texto legible */
+            text-align: center;
+            padding: 10px 0; /* Altura del footer */
+            font-size: 0.8rem;
+            z-index: 1000; /* Asegurar que esté por encima de otros elementos */
+            border-top: 1px solid var(--color-carbon-800); /* Borde sutil */
+        }
     </style>
 </head>
 
 <body>
+    <!-- Transición tipo Apple -->
+    <div class="apple-transition" id="appleTransition" aria-hidden="true">
+        <div class="veil"></div>
+        <img src="{{ asset('images/Logo-MB.svg') }}" class="transition-logo" alt="Logo MB">
+    </div>
     <!-- Partículas -->
     <canvas id="particlesCanvas"></canvas>
 
@@ -313,10 +337,7 @@
     <div class="bg-halo"></div>
     <div class="mouse-halo" id="mouseHalo" aria-hidden="true"></div>
 
-    <!-- Transición tipo Apple -->
-    <div class="apple-transition" id="appleTransition" aria-hidden="true">
-        <div class="veil"></div>
-    </div>
+
 
     <div class="scene">
         <div class="stage">
@@ -405,12 +426,6 @@
                         <p>Identifica activos rápidamente y consulta su ficha pública institucional desde el QR.</p>
                     </div>
                 </div>
-
-                <div class="footer text-center">
-                    © {{ date('Y') }} MB Signature Properties
-                </div>
-
-            </div>
         </div>
     </div>
 
@@ -567,27 +582,9 @@
             requestAnimationFrame(step);
         })();
 
-        // =============================
-        // 🎥 Transición tipo Apple al ir al Dashboard
-        // =============================
-        (function(){
-            const btn = document.getElementById('goDashboard');
-            if(!btn) return;
-
-            const overlay = document.getElementById('appleTransition');
-
-            btn.addEventListener('click', function(e){
-                e.preventDefault();
-                const href = btn.getAttribute('href');
-
-                overlay.classList.add('active');
-
-                // timing breve para “cinematic”
-                setTimeout(()=>{
-                    window.location.href = href;
-                }, 620);
-            });
-        })();
     </script>
+    <footer class="fixed-footer">
+        © {{ date('Y') }} MB Signature Properties. Todos los derechos reservados.
+    </footer>
 </body>
 </html>

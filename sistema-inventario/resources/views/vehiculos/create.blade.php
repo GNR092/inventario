@@ -129,10 +129,24 @@
             Archivo de Factura (PDF)
         </h3>
 
-        <input type="file"
-               name="factura"
-               accept=".pdf"
-               class="input-style rounded-xl px-3 py-2 w-full">
+        <div class="flex items-center gap-4">
+            <label for="factura"
+                   class="btn-primary cursor-pointer">
+                Seleccionar Archivo
+            </label>
+
+            <span id="file-name"
+                  class="text-sm"
+                  style="color: var(--color-carbon-300);">
+                Ningún archivo seleccionado
+            </span>
+
+            <input type="file"
+                   id="factura"
+                   name="factura"
+                   accept=".pdf"
+                   class="hidden">
+        </div>
     </div>
 
     <!-- SUBIR XML CFDI -->
@@ -141,10 +155,24 @@
             Cargar XML CFDI (Autocompletar Datos)
         </h3>
 
-        <input type="file"
-               name="Factura_XML"
-               accept=".xml"
-               class="input-style rounded-xl px-3 py-2 w-full">
+        <div class="flex items-center gap-4">
+            <label for="Factura_XML"
+                   class="btn-secondary cursor-pointer">
+                Seleccionar XML CFDI
+            </label>
+
+            <span id="xml-name"
+                  class="text-sm"
+                  style="color: var(--color-carbon-300);">
+                Ningún XML seleccionado
+            </span>
+
+            <input type="file"
+                   id="Factura_XML"
+                   name="Factura_XML"
+                   accept=".xml"
+                   class="hidden">
+        </div>
 
         <p class="text-xs opacity-70">
             Si el XML es válido, se completarán automáticamente RFC, Razón Social,
@@ -219,6 +247,18 @@ function animate(){
     requestAnimationFrame(animate);
 }
 animate();
+
+/* Nombre archivo factura */
+document.getElementById('factura')?.addEventListener('change', function() {
+    const fileName = this.files[0]?.name || 'Ningún archivo seleccionado';
+    document.getElementById('file-name').textContent = fileName;
+});
+
+/* Nombre XML */
+document.getElementById('Factura_XML')?.addEventListener('change', function() {
+    const fileName = this.files[0]?.name || 'Ningún XML seleccionado';
+    document.getElementById('xml-name').textContent = fileName;
+});
 </script>
 
 </x-app-layout>
